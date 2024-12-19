@@ -1,0 +1,32 @@
+{
+  "name": "@stratox/ssg",
+  "version": "1.0.0",
+  "description": "This is a lightweight Static Site Generator (SSG) library for Stratox that transforms dynamic content into static HTML, optimizing your site for search engines.",
+  "main": "src/index.js",
+  "files": [
+    "src/*.js"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stratoxjs/tailwind.git"
+  },
+  "bugs": {
+    "url": "https://stratox.wazabii.se/issues",
+    "email": "daniel.ronkainen@wazabii.se"
+  },
+  "homepage": "https://wazabii.se/stratox-tailwind/",
+  "keywords": [
+    "Static Site Generator",
+    "SSG",
+    "javascript",
+    "CommonJS",
+    "plugin",
+    "stratox",
+    "modern"
+  ],
+  "author": "Daniel Ronkainen",
+  "license": "Apache-2.0"
+}
