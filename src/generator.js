@@ -1,6 +1,7 @@
-const fs require('fs');
-const path require('path');
-const { chromium } require('playwright-chromium');
+import fs from 'fs';
+import path from 'path';
+import { chromium } from 'playwright-chromium';
+import { resolveConfig } from 'vite';
 
 // Get the Vite server URL from command-line arguments
 const viteServerURL = process.argv[2];
@@ -9,21 +10,22 @@ if (!viteServerURL) {
     process.exit(1);
 }
 
-// Directory for static files
-const outputDir = './dist/';
-const routes = [
-    '/',
-    '/about',
-    '/contact'
-];
-
-// Ensure output directory exists
-if (!fs.existsSync(outputDir)) {
-    fs.mkdirSync(outputDir, { recursive: true });
+// Function to dynamically load routes from Vite config
+async function getRoutesFromConfig() {
+    try {
+        const viteConfig = await resolveConfig({}, 'serve'); // Load Vite config
+        const startoxSSGConfig = viteConfig.startoxSSG || {};
+        const paths = startoxSSGConfig.paths || [];
+        const outputDir = viteConfig.build?.outDir || './dist';
+        return { paths, outputDir };
+    } catch (error) {
+        console.error(`Error loading Vite config: ${error.message}`);
+        process.exit(1);
+    }
 }
 
 // Function to render a route with Playwright and save the rendered HTML
-async function renderAndSaveRoute(browser, route) {
+async function renderAndSaveRoute(browser, route, outputDir) {
     const page = await browser.newPage();
     const url = `${viteServerURL}${route}`;
 
@@ -55,11 +57,24 @@ async function renderAndSaveRoute(browser, route) {
 
 // Crawl all routes using Playwright
 (async function crawlSite() {
-    const browser = await chromium.launch({ headless: true }); // Launch Playwright browser
+    const { paths, outputDir } = await getRoutesFromConfig();
 
-    for (const route of routes) {
-        await renderAndSaveRoute(browser, route);
+    if (paths.length === 0) {
+        console.error('No paths found in Vite configuration.');
+        process.exit(1);
+    }
+
+    // Ensure output directory exists
+    if (!fs.existsSync(outputDir)) {
+        fs.mkdirSync(outputDir, { recursive: true });
+    }
+
+    const browser = await chromium.launch({ headless: true });
+
+    for (const route of paths) {
+        await renderAndSaveRoute(browser, route, outputDir);
     }
 
     await browser.close();
+
 })();
