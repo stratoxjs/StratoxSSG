@@ -16,9 +16,9 @@ The Stratox Static Site Generator (SSG) is a lightweight tool that transforms yo
 
 1. Ensure **Node.js** is installed on your system.
 2. Install Stratox SSG via npm:
-   ```bash
-   npm install @stratox/ssg --save-dev
-   ```
+```bash
+npm install @stratox/ssg --save-dev
+```
 ---
 
 ## Usage Guide
@@ -48,26 +48,26 @@ Run the following commands to build your static files:
 
 1. **Basic Build**:
    ```bash
-   ssg build
+   npx ssg build
    ```
    This command generates static files and outputs them to the `dist` directory.
 
 2. **Custom Port**:
    To specify a custom port for the build script to access, use:
    ```bash
-   ssg build --port 5193
+   npx ssg build --port 5193
    ```
 
 3. **Custom Host**:
    To specify a custom host for the build script, use:
    ```bash
-   ssg build --host example.test
+   npx ssg build --host example.test
    ```
 
 4. **Enable HTTPS**:
    To use HTTPS for the build script, add the `--ssl` option:
    ```bash
-   ssg build --ssl true
+   npx ssg build --ssl true
    ```
 
 ---
