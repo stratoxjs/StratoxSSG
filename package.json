@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "This is a lightweight Static Site Generator (SSG) library for Stratox that transforms dynamic content into static HTML, optimizing your site for search engines.",
   "type": "module",
-  "main": "ssg.js",
+  "main": "src/ssg.js",
   "bin": {
-    "ssg": "ssg.js"
+    "ssg": "src/ssg.js"
   },
   "files": [
     "src/*.js"
