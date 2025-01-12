@@ -45,7 +45,7 @@ async function renderAndSaveRoute(browser, route, outputDir) {
     const html = await page.content(); // Get fully rendered HTML
     const filePath = path.join(
         outputDir,
-        route === '/' ? 'index.html' : `${route.replace(/^\//, '').replace(/\//g, '-')}.html`
+        route === '/' ? 'index.html' : `${route.replace(/^\//, '').replace('#', '').replace(/\//g, '-')}.html`
     );
     fs.writeFileSync(filePath, html, 'utf-8');
     console.log(ansi(['green'], `Successfully saved: ${filePath}`));

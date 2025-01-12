@@ -1,6 +1,6 @@
 {
   "name": "@stratox/ssg",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "This is a lightweight Static Site Generator (SSG) library for Stratox that transforms dynamic content into static HTML, optimizing your site for search engines.",
   "type": "module",
   "main": "src/ssg.js",
